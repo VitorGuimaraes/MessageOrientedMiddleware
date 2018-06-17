@@ -1,0 +1,10 @@
+// server.idl
+
+module MainClient {
+    interface Client {
+
+	void receive_msg(in string sender, in string receiver, in string msg, in string timestamp); 
+	void update_contacts_status(in string user_name, in string new_status);
+	
+    };   
+};

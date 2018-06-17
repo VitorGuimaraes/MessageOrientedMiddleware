@@ -1,0 +1,13 @@
+// server.idl
+
+module MainServer {
+    interface Server {
+
+	void receive_username(in string user_name);
+	void send_msg(in string sender, in string receiver, in string msg, in string timestamp);
+	void send_status(in string user_name, in string new_status);
+		
+
+	string server_users_list(in long index); 
+    };   
+};

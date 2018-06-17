@@ -1,0 +1,18 @@
+-Instalar o RabbitMQ:
+ download Erlang/OTP:
+  https://packages.erlang-solutions.com/erlang/#tabs-debian     
+  instalar com sudo dpkg -i nome_do_pacote
+
+ download RabbitMQ.deb:
+ https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.5/rabbitmq-server_3.7.5-1_all.deb
+ instalar com sudo dpkg -i nome_do_pacote
+
+ Instalar Pika
+  pip install pika
+  documentação pika: https://pika.readthedocs.io/en/latest/index.html
+
+Start the RabbitMQ server:
+sudo service rabbitmq-server start
+
+-Instalar Tkinter
+sudo apt-get install python-tk

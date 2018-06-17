@@ -1,0 +1,43 @@
+#:kivy 1.10
+
+# Importando pacotes
+# #: include file.kv
+
+# Definindo constantes:
+#:set constant_x 50
+
+# A classe inteira eh BoxLayout
+<Tela1@BoxLayout>:
+    orientation: "vertical"
+
+    Button:
+        text: "Clique"
+        on_press: root.on_press_bt()
+
+        height: 25
+        x: 40
+        y: 100
+
+    Button:
+        text: "bt2"
+        on_press: root.add_button()
+        height: 25
+
+    Button:
+        text: "bt3"
+        on_press: root.add_button()
+        height: 50
+
+<Tela2>:
+    orientation: "vertical"
+    Button:
+        text: "Clique"
+        on_press: root.on_press_bt()
+
+# equivalente a:
+# class KVvsPY(App):
+#     pass
+#     def build(self):
+#         return Tela1()
+Tela1:
+     

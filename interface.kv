@@ -1,0 +1,311 @@
+#:kivy 1.10
+
+# Calcular y:
+# y: 715 - dest - self.height 
+# dest: posição desejada; self.height: altura do widget
+
+<BuildRegister>:
+    Image:    
+        source: "interface/Register/register.png"
+
+        Button:
+            size: (25, 25)
+            pos: (360, 645)    
+            background_color: (1.0, 1.0, 1.0, 0.01) 
+            on_press: root.on_click()
+
+        TextInput:
+            id: username
+            size: (240, 28) 
+            pos: (120, 550) 
+            font_name: "interface/Montserrat-Medium.ttf"
+            font_size: 14
+            cursor_color: [0.31, 0.49, 0.63, 1.0]
+
+<BuildHome>:
+    Image:
+        source: "interface/Home/top_bar.png"
+
+        Switch:
+            pos: (230, 615)
+            active: True
+
+        Button:
+            size: (40, 40)
+            pos: (345, 643)    
+            background_color: (1.0, 1.0, 1.0, 0.01) 
+            on_press: root.add_contact()
+           
+        Button:
+            size: (402, 80)
+            y: 549 #715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+            on_press: root.open_message()
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-SemiBold.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+
+##########################################################
+        Button:
+            size: (402, 80)
+            y: 549 - 80 #715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+
+        Button:
+            size: (402, 80)
+            y: 549 - 160  #715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+
+        Button:
+            size: (402, 80)
+            y: 549 - 80 - 160 + 80#715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+        
+        Button:
+            size: (402, 80)
+            y: 549 - 160 - 160 + 80#715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+
+        Button:
+            size: (402, 80)
+            y: 549 - 240 - 160 + 80#715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+        
+        Button:
+            size: (402, 80)
+            y: 549 - 240 - 240 + 80#715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+
+        Button:
+            size: (402, 80)
+            y: 549 - 480 - 80 + 80#715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+        
+        Button:
+            size: (402, 80)
+            y: 549 - 480 - 160 + 80#715 - 86 - 80
+            background_color: (255, 255, 255, 1)
+
+            Image:
+                source: "interface/Home/contact.png"
+                size: (80, 80)
+                y: self.parent.y 
+            
+            Label: 
+                size: (15, 100)
+                x: 140 
+                y: self.parent.y + 5
+                text: "Vitor Guimarães" 
+                font_name: "interface/Montserrat-Medium.ttf"
+                font_size: 16
+                color: (0, 0, 0, 1)
+            
+            Image: 
+                source: "interface/online.png"
+                size: (80, 80)
+                x: 330
+                y: self.parent.y + 10
+
+<AddContact>:
+    Image:    
+        source: "add_contact.png"
+
+        Button:
+            size: (25, 25)
+            pos: (360, 645)    
+            background_color: (1.0, 1.0, 1.0, 0.01) 
+            on_press: root.confirm()
+
+        TextInput:
+            size: (240, 28) 
+            pos: (120, 550) 
+            font_name: "Montserrat-Medium.ttf"
+            font_size: 14
+            cursor_color: [0.31, 0.49, 0.63, 1.0]
+
+<Chat>:
+    Image:
+        source: "interface/Chat/chat_bars.png"
+
+        Button:
+            id: back_home
+            size: (22, 22)
+            pos: (20, 650)    
+            background_color: (1.0, 1.0, 1.0, 0.8) 
+            on_press: root.back_home()
+
+        Image:
+            id: status
+            source: "interface/offline.png"
+            pos: (320, 610)
+
+        Button:
+            id: send_message
+            size: (25, 25)
+            pos: (362, 15)    
+            background_color: (1.0, 1.0, 1.0, 1) 
+
+        TextInput:
+            id: message_box
+            size: (280, 28) 
+            pos: (60, 15) 
+            font_name: "interface/Montserrat-Medium.ttf"
+            font_size: 14
+            cursor_color: [0.31, 0.49, 0.63, 1.0]
