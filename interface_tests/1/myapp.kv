@@ -1,0 +1,25 @@
+#:kivy 1.10
+
+<Menu>:
+    FloatLayout:
+        size: self.size
+        pos: self.pos
+
+        Button:
+            text: "Button 1"
+            size_hint: .3, .2
+            pos_hint: {"x": .1, "y": .1}
+            on_press: print "Button 1"
+            on_press: root.manager.current = "game"
+
+<Game>:
+    FloatLayout:
+        size: self.size
+        pos: self.pos
+
+        Button:
+            text: "Back to Menu"
+            size_hint: .3, .2
+            pos_hint: {"x": .1, "y": .1}
+            on_press: print "Back button"
+            on_press: root.manager.current = "menu"

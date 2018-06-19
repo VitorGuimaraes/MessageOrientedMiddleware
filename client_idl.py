@@ -41,8 +41,9 @@ _0_MainClient._tc_Client = omniORB.tcInternal.createTypeCode(_0_MainClient._d_Cl
 omniORB.registerType(Client._NP_RepositoryId, _0_MainClient._d_Client, _0_MainClient._tc_Client)
 
 # Client operations and attributes
+Client._d_return_status = ((), (omniORB.tcInternal.tv_boolean, ), None)
 Client._d_receive_msg = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), None)
-Client._d_update_contacts_status = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), None)
+Client._d_update_contacts_status = (((omniORB.tcInternal.tv_string,0), omniORB.tcInternal.tv_boolean), (), None)
 
 # Client object reference
 class _objref_Client (CORBA.Object):
@@ -50,6 +51,9 @@ class _objref_Client (CORBA.Object):
 
     def __init__(self, obj):
         CORBA.Object.__init__(self, obj)
+
+    def return_status(self, *args):
+        return self._obj.invoke("return_status", _0_MainClient.Client._d_return_status, args)
 
     def receive_msg(self, *args):
         return self._obj.invoke("receive_msg", _0_MainClient.Client._d_receive_msg, args)
@@ -67,7 +71,7 @@ class Client (PortableServer.Servant):
     _NP_RepositoryId = _0_MainClient.Client._NP_RepositoryId
 
 
-    _omni_op_d = {"receive_msg": _0_MainClient.Client._d_receive_msg, "update_contacts_status": _0_MainClient.Client._d_update_contacts_status}
+    _omni_op_d = {"return_status": _0_MainClient.Client._d_return_status, "receive_msg": _0_MainClient.Client._d_receive_msg, "update_contacts_status": _0_MainClient.Client._d_update_contacts_status}
 
 Client._omni_skeleton = Client
 _0_MainClient__POA.Client = Client

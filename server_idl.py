@@ -43,8 +43,8 @@ omniORB.registerType(Server._NP_RepositoryId, _0_MainServer._d_Server, _0_MainSe
 # Server operations and attributes
 Server._d_receive_username = (((omniORB.tcInternal.tv_string,0), ), (), None)
 Server._d_send_msg = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), None)
-Server._d_send_status = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), None)
-Server._d_server_users_list = ((omniORB.tcInternal.tv_long, ), ((omniORB.tcInternal.tv_string,0), ), None)
+Server._d_send_status = (((omniORB.tcInternal.tv_string,0), omniORB.tcInternal.tv_boolean), (), None)
+Server._d_username_is_registered = (((omniORB.tcInternal.tv_string,0), ), (omniORB.tcInternal.tv_boolean, ), None)
 
 # Server object reference
 class _objref_Server (CORBA.Object):
@@ -62,8 +62,8 @@ class _objref_Server (CORBA.Object):
     def send_status(self, *args):
         return self._obj.invoke("send_status", _0_MainServer.Server._d_send_status, args)
 
-    def server_users_list(self, *args):
-        return self._obj.invoke("server_users_list", _0_MainServer.Server._d_server_users_list, args)
+    def username_is_registered(self, *args):
+        return self._obj.invoke("username_is_registered", _0_MainServer.Server._d_username_is_registered, args)
 
 omniORB.registerObjref(Server._NP_RepositoryId, _objref_Server)
 _0_MainServer._objref_Server = _objref_Server
@@ -75,7 +75,7 @@ class Server (PortableServer.Servant):
     _NP_RepositoryId = _0_MainServer.Server._NP_RepositoryId
 
 
-    _omni_op_d = {"receive_username": _0_MainServer.Server._d_receive_username, "send_msg": _0_MainServer.Server._d_send_msg, "send_status": _0_MainServer.Server._d_send_status, "server_users_list": _0_MainServer.Server._d_server_users_list}
+    _omni_op_d = {"receive_username": _0_MainServer.Server._d_receive_username, "send_msg": _0_MainServer.Server._d_send_msg, "send_status": _0_MainServer.Server._d_send_status, "username_is_registered": _0_MainServer.Server._d_username_is_registered}
 
 Server._omni_skeleton = Server
 _0_MainServer__POA.Server = Server

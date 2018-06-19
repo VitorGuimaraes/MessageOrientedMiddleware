@@ -1,63 +1,74 @@
 # -*- coding: utf-8 -*-
-import kivy 
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout 
-from kivy.uix.gridlayout import GridLayout
+from kivy.lang.builder import Builder
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button 
-from kivy.config import Config
 
-import CosNaming, MainClient, MainClient__POA
+class Master():
+    class Menu(Screen):
+        def __init__(self, **kwargs):
+            super(Master.Menu, self).__init__(**kwargs)
 
-Config.set('graphics', 'resizable', False)
-Config.set('graphics', 'width', '402')
-Config.set('graphics', 'height', '715')
+            self.add_contact_btn = Button()
+            self.add_contact_btn.size_hint = (None, None)
+            self.add_contact_btn.size = (40, 40)
+            self.add_contact_btn.pos = (0, 45)
+            self.add_contact_btn.background_color = (1.0, 0.5, 1.0, 1) 
 
-class Tela1(MainClient__POA.Client, GridLayout):
+            self.add_contact_btn.on_press = self.pressed
+
+            self.add_widget(self.add_contact_btn)
+
+        def pressed(self):
+            App.get_running_app().sm.current = "game"
+
+    class Game(Screen):
+        def __init__(self, **kwargs):
+            super(Master.Game, self).__init__(**kwargs)
+
+            self.add_contact_btn = Button()
+            self.add_contact_btn.size_hint = (None, None)
+            self.add_contact_btn.size = (70, 70)
+            self.add_contact_btn.pos = (0, 45)
+            self.add_contact_btn.background_color = (1.0, 0.5, 1.0, 1) 
+            
+            self.add_contact_btn.on_press = self.pressed
+
+            self.add_widget(self.add_contact_btn)
+
+        def pressed(self):
+            App.get_running_app().sm.current = "menu"
     
-    def on_press_bt(self):
-        # Remove a tela1 do top da hierarquia
-        janela.root_window.remove_widget(janela.root)
+    class Test(FloatLayout):
+        def __init__(self, **kwargs):
+            super(Master.Test, self).__init__(**kwargs)
 
-        # Adiciona uma instância de Tela2 ao topo da hierarquia
-        janela.root_window.add_widget(Tela2())
+            self.add_contact_btn = Button()
+            self.add_contact_btn.size_hint = (None, None)
+            self.add_contact_btn.size = (120, 120)
+            self.add_contact_btn.pos = (0, 60)
+            self.add_contact_btn.background_color = (1.0, 0.5, 1.0, 1) 
 
-    def add_button(self):
-        self.add_widget(Button(text = "new button"))
+            self.add_contact_btn.on_press = self.pressed
 
-    # def __init__(self, **kwargs):
-    #     super(Tela1, self).__init__(**kwargs)
-    #     self.orientation = "vertical"
+            self.add_widget(self.add_contact_btn)
+
+        def pressed(self):
+            App.get_running_app().stop()
+
+class Runner1(App):
+    def build(self):       
+        return Master().Test()
+
+Runner1().run()
+
+class Runner(App):
+    sm = ScreenManager()
+
+    def build(self):
+        Runner.sm.add_widget(Master.Menu(name = "menu"))
+        Runner.sm.add_widget(Master.Game(name = "game"))
         
-    #     # Criando botão e adicionando ao layout
-    #     bt1 = Button(text = "Clique")
-    #     # Associa a função on_press_button para ser a função de pressionamento do botão
-    #     bt1.on_press = self.on_press_bt
-    #     self.add_widget(bt1)
-
-    #     # Criando e adicionando diretamente
-    #     self.add_widget(Button(text = "bt2"))
-    #     self.add_widget(Button(text = "bt3"))
-
-class Tela2(BoxLayout):
-
-    def on_press_bt(self):
-        # Remove a tela2 do top da hierarquia
-        janela.root_window.remove_widget(janela.root)
-
-        # Adiciona uma instância de Tela1 ao topo da hierarquia
-        janela.root_window.add_widget(Tela1())
-
-    # def __init__(self, **kwargs):
-    #     super(Tela2, self).__init__(**kwargs)
-    #     self.orientation = "vertical"
-    #     bt = Button(text = "Clique")
-    #     bt.on_press = self.on_press_bt
-    #     self.add_widget(bt)
-
-class KVvsPY(App):
-    pass
-    # def build(self):
-        # return Tela1()
-
-janela = KVvsPY()
-janela.run()
+        return Runner.sm
+Runner().run()

@@ -7,12 +7,16 @@
  https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.5/rabbitmq-server_3.7.5-1_all.deb
  instalar com sudo dpkg -i nome_do_pacote
 
- Instalar Pika
+ Instalar Pika (necessário para o RabbitMQ)
   pip install pika
   documentação pika: https://pika.readthedocs.io/en/latest/index.html
 
 Start the RabbitMQ server:
 sudo service rabbitmq-server start
 
+Instalar Soappy (webservice)
+pip install SOAPpy
+
 -Instalar Tkinter
 sudo apt-get install python-tk
+

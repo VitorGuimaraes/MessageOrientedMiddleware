@@ -1,7 +1,7 @@
 class Contact():
     def __init__(self, name):
         self.name = name
-        self.status = 1
+        self.status = True
         self.messages = []
 
     def add_msg(self, sender, msg, time):
