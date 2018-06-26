@@ -1,0 +1,36 @@
+#:kivy 1.10
+
+<CustTextInput@TextInput>:
+    size: 300,50
+    color: .10,.9,1,2
+
+<CustButton@Button>:
+    font_size: 16
+    size: 100,50
+
+<TheWidget>:
+
+    CustTextInput:
+        id: inp
+        hint_text: "First Name"
+        pos: root.x, (root.height / 2) + 250
+
+    CustTextInput:
+        id: inp2
+        hint_text: "Last Name"
+        pos: root.x, (root.height / 2) + 180
+
+
+    Label:
+        id: label
+        text: ""
+        pos: root.x + 400, (root.height / 2) + 190
+        color: 244, 65, 223,1
+        
+    CustButton:
+        text: "Submit"
+        pos: root.x + 310, (root.height / 2) + 210
+        on_press: inp.text = ""
+        on_press: inp2.text = ""
+        on_press: label.text = "Submitted"
+        on_press: self.disabled = True

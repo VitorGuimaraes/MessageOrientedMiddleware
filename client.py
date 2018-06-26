@@ -41,6 +41,7 @@ soap_server = SOAPProxy("http://localhost:8081/")
 # Registra o usuário no nameserver com seu username
 my_username = ""
 new_contact_added = ""
+contacts = []
 
 # Retorna o objeto do servidor para invocar seus métodos
 server_obj = client_side.bind()
@@ -68,7 +69,7 @@ class MasterClient(MainClient__POA.Client):
 
             # TextInput field
             self.username = TextInput()
-            self.username.size = (240, 28)
+            self.username.size = (240, 29)
             self.username.pos = (113, 545) 
             self.username.font_name = "interface/Montserrat-Medium.ttf"
             self.username.font_size = 14
@@ -125,18 +126,18 @@ class MasterClient(MainClient__POA.Client):
 
             # Switch status image
             self.switch_img = Image()
+            self.add_widget(self.float_layout)
             self.switch_status.add_widget(self.switch_img)
             self.switch_img.source = ("interface/Home/switch_on.png")
             self.switch_img.size = (43, 24)
             self.switch_img.pos = (20, 651)
 
-            self.add_widget(self.float_layout)
-
             # Scroll View
             self.scroll_view = ScrollView() 
+            self.add_widget(self.scroll_view)
             self.scroll_view.size_hint = (None, None)
             self.scroll_view.size = (402, 630) 
-            self.scroll_view.y = 5
+            self.scroll_view.y = self.scroll_view.parent.x
             self.scroll_view.orientation = "vertical"
             self.scroll_view.background_color = (255, 0, 0, 1)
             
@@ -147,13 +148,47 @@ class MasterClient(MainClient__POA.Client):
             self.box.orientation = "vertical"
             self.box.size_hint_y = None
             self.box.bind(minimum_height = self.box.setter("height")) 
-            self.box.y = 630
-            
-            self.box.add_widget(ContactBox("Vitor"))
-            self.box.add_widget(ContactBox("Marcos"))
-            self.box.add_widget(ContactBox("Thalia"))
+            self.box.y = self.box.parent.y
 
-            self.add_widget(self.scroll_view)
+            print(len(contacts))
+            for contact in contacts: 
+                print("entrei aqui no coisa do bicho do negoço")
+                print(contact)
+                ###
+                # Box button
+                box_button = Button()
+                self.box.add_widget(box_button)
+
+                box_button.size_hint = (None, None)
+                box_button.width = 402
+                box_button.height = 80
+                #box_button.background_color = (255, 255, 255, 1)
+
+                # Contact photo image
+                contact_photo = Image()
+                box_button.add_widget(contact_photo)
+                contact_photo.source = ("interface/Home/contact.png")
+                contact_photo.size_hint = (None, None)
+                contact_photo.pos_hint = (None, None)
+                contact_photo.size = (80, 80)
+                contact_photo.pos = (0, 0)
+                
+                # Contact status img
+                contact_img_status = Image()
+                box_button.add_widget(contact_img_status)
+                contact_img_status.source = ("interface/online.png")
+                contact_img_status.size_hint = (None, None)
+                contact_img_status.pos_hint = (None, None)
+                contact_img_status.size = (80, 80)
+                contact_img_status.pos = (330, contact_img_status.parent.y)
+                
+                # Contact name label
+                lbl_name = Label()
+                box_button.add_widget(lbl_name)
+                lbl_name.text = contact_name
+                lbl_name.size = (15, 120)
+                lbl_name.pos = (90, contact_img_status.parent.y)
+                ###
 
         def press_switch_status(self):
             if self.switch_img.source == ("interface/Home/switch_on.png"):
@@ -165,8 +200,8 @@ class MasterClient(MainClient__POA.Client):
         def press_add_contact_button(self): 
             App.get_running_app().sm.current = "addcontact"
 
-        def add_contact_box(self, new_contact_added):
-            self.box.add_widget(ContactBox(new_contact_added))
+        # def add_contact_box(self, new_contact_added):
+        #     self.box.add_widget(ContactBox(new_contact_added))
 
     class AddContact(Screen):
         def __init__(self, ms, home_screen, **kwargs):
@@ -204,7 +239,8 @@ class MasterClient(MainClient__POA.Client):
             
         def add_contact(self):
             new_contact_added = str(self.contact_username.text)
-            self.home_screen.add_contact_box(new_contact_added)
+            self.ms.add_contact(new_contact_added)
+            
             App.get_running_app().sm.current = "home"
 
     class Chat(Screen):
@@ -244,7 +280,6 @@ class MasterClient(MainClient__POA.Client):
     ############ Master Client ############
 
     status = True
-    contacts = []
 
     def kill_consumer():
         channel.stop_consuming()
@@ -265,13 +300,13 @@ class MasterClient(MainClient__POA.Client):
             for methods, properties, body in channel.consume(my_username):
                 print(body)
             channel.stop_consuming()
-            print("Consumação terminada")
+            print("Consumação finalizada")
 
         server_obj.send_status(my_username, self.status)
 
     # Acho que ta errado. Vai ficar parecido com o metodo send_msg do servidor
     def update_contacts_status(self, user_name, new_status):
-        if user_name in [contact.name for contact in self.contacts]:
+        if user_name in [contact.name for contact in contacts]:
             contact.status = new_status
         
     # Adiciona um contato se o username existir na lista de usuários cadastrados
@@ -280,9 +315,12 @@ class MasterClient(MainClient__POA.Client):
         server_username = server_obj.username_is_registered(contact_name)
         print(server_username)
         if server_username is True:
-            print("Entrei no add_contact do cliente")
+            print("O contato existe no servidor e foi adicionado")
             new_contact = Contact(contact_name)
-            self.contacts.append(new_contact)
+            contacts.append(new_contact)
+
+            # for contact in contacts:
+            #     print contact
 
     # Envia mensagem para um contato
     def send_msg(self, sender, receiver, msg, timestamp):
@@ -300,9 +338,6 @@ class runRegister(App):
         return MasterClient().Register() 
 
 runRegister().run()
-
-# passar isso pro servidor
-# channel.queue_declare(queue = my_username)
 
 ##################### Corba Configuration #####################
 
